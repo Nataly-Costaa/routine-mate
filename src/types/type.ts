@@ -4,3 +4,9 @@ export interface Habit {
     description: string;
     goal: string;
 }
+export interface Report {
+    total: number;
+    completed: number;
+    pending: number;
+    progress: string;
+}
