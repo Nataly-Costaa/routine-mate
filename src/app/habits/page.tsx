@@ -4,6 +4,8 @@ import Header from "../../components/Header";
 import HabitForm from "@/components/HabitForm";
 import { fetchReport, fetchRoutine, createHabit } from "@/lib/api";
 import { Habit, Report } from "@/types/type";
+import Loading from "@/components/Loanding";
+
 
 export default function HabitRoutine() {
   const [routines, setRoutines] = useState<Habit[]>([]);
@@ -33,6 +35,9 @@ export default function HabitRoutine() {
     <>
       <Header />
 
+      {(!routines.length || !report) ? (
+      <Loading />
+      ) : (
       <main className="max-w-3xl mx-auto p-4">
         {/* Relatório */}
         {report && (
@@ -78,6 +83,7 @@ export default function HabitRoutine() {
           ))}
         </section>
       </main>
+      )}
     </>
   );
 }

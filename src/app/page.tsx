@@ -3,8 +3,6 @@ import HabitRoutine from './habits/page'
 
 export default function Page() {
   return (
-    //<>
       <HabitRoutine/>
-    //</>
   )
 }
