@@ -2,7 +2,13 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import HabitForm from "@/components/HabitForm";
-import { fetchReport, fetchRoutine, createHabit, deleteHabit } from "@/lib/api";
+import {
+  fetchReport,
+  fetchRoutine,
+  createHabit,
+  deleteHabit,
+  markHabitAsCompleted,
+} from "@/lib/api";
 import { Habit, Report } from "@/types/type";
 import Loading from "@/components/Loanding";
 import { Trash2 } from "lucide-react";
@@ -43,6 +49,16 @@ export default function HabitRoutine() {
     } catch (error) {
       alert("Erro ao deletar rotina.");
       console.error(error);
+    }
+  };
+
+  const handleToggleComplete = async (id: string) => {
+    try {
+      await markHabitAsCompleted(id);
+      await loadData();
+    } catch (error) {
+      console.error("Erro ao atualizar hábito:", error);
+      alert("Erro ao atualizar status da rotina.");
     }
   };
 
@@ -90,11 +106,25 @@ export default function HabitRoutine() {
           {/* Lista de rotinas */}
           <section className="space-y-4">
             {routines.map((h: Habit) => (
-              <div key={h.id} className="relative border p-4 bg-white rounded shadow ">
-                <h2 className="text-xl font-bold">{h.title}</h2>
-                <p>{h.description}</p>
-                <p className="text-sm text-gray-600">Meta: {h.goal}</p>
+              <div
+                key={h.id}
+                className="relative border p-4 bg-white rounded shadow "
+              >
+                <div className="flex items-center mb-2">
+    <input
+      type="checkbox"
+      checked={h.completed}
+      onChange={() => handleToggleComplete(h.id)}
+      className="w-5 h-5 mr-2 accent-green-600 cursor-pointer"
+      title={h.completed ? "Hábito concluído" : "Hábito pendente"}
+    />
+    <span className={`text-xl font-bold ${h.completed ? "line-through text-gray-400" : ""}`}>
+      {h.title}
+    </span>
+  </div>
 
+  <p>{h.description}</p>
+  <p className="text-sm text-gray-600">Meta: {h.goal}</p>
                 <button
                   onClick={() => handleDelete(h.id)}
                   className="absolute top-2 right-2 p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md cursor-pointer"
