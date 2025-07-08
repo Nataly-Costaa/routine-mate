@@ -44,7 +44,7 @@ export default function HabitForm({ onAdd }: HabitFormProps) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="bg-gray-100 p-4 rounded mb-6 space-y-4"
+      className="bg-amber-100 p-4 rounded mb-6 space-y-4"
     >
       <h2 className="text-lg font-semibold">➕ Nova Rotina</h2>
 
@@ -53,7 +53,7 @@ export default function HabitForm({ onAdd }: HabitFormProps) {
           type="text"
           placeholder="Título"
           {...register("title")}
-          className="border w-full p-2 rounded"
+          className="border w-full p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-600"
         />
         {errors.title && (
           <p className="text-red-600 text-sm mt-1">{errors.title.message}</p>
@@ -64,7 +64,7 @@ export default function HabitForm({ onAdd }: HabitFormProps) {
         <textarea
           placeholder="Descrição"
           {...register("description")}
-          className="border w-full p-2 rounded"
+          className="border w-full p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-600"
         />
         {errors.description && (
           <p className="text-red-600 text-sm mt-1">{errors.description.message}</p>
@@ -74,9 +74,9 @@ export default function HabitForm({ onAdd }: HabitFormProps) {
       <div>
         <input
           type="text"
-          placeholder="Meta (ex: 2L por dia)"
+          placeholder="Meta (ex: 1 Semana)"
           {...register("goal")}
-          className="border w-full p-2 rounded"
+          className="border w-full p-2 rounded focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-600"
         />
         {errors.goal && (
           <p className="text-red-600 text-sm mt-1">{errors.goal.message}</p>

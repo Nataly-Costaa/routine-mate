@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import HabitForm from "@/components/HabitForm";
+import { Habit, Report } from "@/types/type";
+import Loading from "@/components/Loanding";
+import { Trash2 } from "lucide-react";
 import {
   fetchReport,
   fetchRoutine,
@@ -9,9 +12,7 @@ import {
   deleteHabit,
   markHabitAsCompleted,
 } from "@/lib/api";
-import { Habit, Report } from "@/types/type";
-import Loading from "@/components/Loanding";
-import { Trash2 } from "lucide-react";
+
 
 export default function HabitRoutine() {
   const [routines, setRoutines] = useState<Habit[]>([]);
@@ -69,29 +70,32 @@ export default function HabitRoutine() {
       {!routines.length || !report ? (
         <Loading />
       ) : (
-        <main className="max-w-3xl mx-auto p-4">
+        <main className="max-w-5xl mx-auto p-4">
           {/* Relatório */}
           {report && (
-            <section className="flex justify-evenly bg-white rounded shadow p-4 mb-8">
-              <div className="flex items-center justify-center rounded w-50 h-44">
+            <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 bg-white rounded shadow p-4 mb-8">
+              <div className="flex items-center justify-center rounded h-44 col-span-1 border border-amber-400">
                 <p className="flex flex-col text-3xl text-center">
                   <strong className="text-xl text-gray-400">Total:</strong>{" "}
                   {report.total}
                 </p>
               </div>
-              <div className="flex items-center justify-center rounded w-50 h-44">
+
+              <div className="flex items-center justify-center rounded h-44 col-span-1 border border-amber-400">
                 <p className="flex flex-col text-3xl text-center">
                   <strong className="text-xl text-gray-400">Concluídos:</strong>{" "}
                   {report.completed}
                 </p>
               </div>
-              <div className="flex items-center justify-center rounded w-50 h-44">
+
+              <div className="flex items-center justify-center rounded h-44 col-span-1 border border-amber-400">
                 <p className="flex flex-col text-3xl text-center">
                   <strong className="text-xl text-gray-400">Pendentes:</strong>{" "}
                   {report.pending}
                 </p>
               </div>
-              <div className="flex items-center justify-center rounded w-50 h-44">
+
+              <div className="flex items-center justify-center rounded h-44 col-span-1 border border-amber-400">
                 <p className="flex flex-col text-3xl text-center">
                   <strong className="text-xl text-gray-400">Progresso:</strong>{" "}
                   {report.progress}
@@ -108,23 +112,27 @@ export default function HabitRoutine() {
             {routines.map((h: Habit) => (
               <div
                 key={h.id}
-                className="relative border p-4 bg-white rounded shadow "
+                className="relative border border-amber-400 p-4 bg-white rounded shadow "
               >
                 <div className="flex items-center mb-2">
-    <input
-      type="checkbox"
-      checked={h.completed}
-      onChange={() => handleToggleComplete(h.id)}
-      className="w-5 h-5 mr-2 accent-green-600 cursor-pointer"
-      title={h.completed ? "Hábito concluído" : "Hábito pendente"}
-    />
-    <span className={`text-xl font-bold ${h.completed ? "line-through text-gray-400" : ""}`}>
-      {h.title}
-    </span>
-  </div>
+                  <input
+                    type="checkbox"
+                    checked={h.completed}
+                    onChange={() => handleToggleComplete(h.id)}
+                    className="w-5 h-5 mr-2 accent-green-600 cursor-pointer"
+                    title={h.completed ? "Hábito concluído" : "Hábito pendente"}
+                  />
+                  <span
+                    className={`text-xl font-bold ${
+                      h.completed ? "line-through text-gray-400" : ""
+                    }`}
+                  >
+                    {h.title}
+                  </span>
+                </div>
 
-  <p>{h.description}</p>
-  <p className="text-sm text-gray-600">Meta: {h.goal}</p>
+                <p>{h.description}</p>
+                <p className="text-sm text-gray-600">Meta: {h.goal}</p>
                 <button
                   onClick={() => handleDelete(h.id)}
                   className="absolute top-2 right-2 p-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md cursor-pointer"
