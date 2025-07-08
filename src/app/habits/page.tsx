@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import HabitForm from "@/components/HabitForm";
 import { Habit, Report } from "@/types/type";
 import Loading from "@/components/Loanding";
+import Footer from "@/components/Footer";
 import { Trash2 } from "lucide-react";
 import {
   fetchReport,
@@ -145,6 +146,8 @@ export default function HabitRoutine() {
           </section>
         </main>
       )}
+
+      <Footer/>
     </>
   );
 }
