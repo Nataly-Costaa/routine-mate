@@ -54,3 +54,9 @@ npm run dev
    [API Routine Mate](https://api-routine-mate.onrender.com/habits)
 3. **Link do repositório da api:**
    [Repositório da API Routine Mate](https://github.com/Nataly-Costaa/api-routine-mate)
+
+---
+
+## Sobre
+- **Link do deploy:** [Routine Mate](https://routine-mate-tau.vercel.app/)
+- **Link da postagem no LinkedIn:** [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:7348505164644782081/)
